@@ -136,3 +136,26 @@ let g:perl_fold_blocks = 0
 let g:r_syntax_folding = 0
 let g:rust_fold = 0
 let g:php_folding = 0
+
+let g:ale_fixers = {
+\   'cpp': ['clang-format'],
+\   'c': ['clang-format'],
+\   'h': ['clang-format'],
+\   'hpp': ['clang-format']
+\}
+
+" More reliable file type detection and formatting
+augroup CLangFormatting
+    autocmd!
+    autocmd BufNewFile,BufRead *.cpp,*.h,*.hpp,*.c let b:ale_fix_on_save = 1
+augroup END
+
+" Make sure clang-format is properly configured
+let g:ale_cpp_clangformat_executable = 'clang-format'
+let g:ale_cpp_clangformat_options = ''
+
+" Optional debugging
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+" Compile and run your cpp code
+autocmd FileType cpp map <F9> :w <CR>:terminal<CR>g++ main.cpp -o main<CR>main<CR> 
