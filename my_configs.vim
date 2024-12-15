@@ -97,6 +97,42 @@ set history=1000
 " Tab out of parentheses/brackets/quotes
 inoremap <expr> <Tab> search('\%#[]>)}''"]', 'n') ? '<Right>' : '<Tab>'
 
+"Open terminal below and set height to 15
+set splitbelow
+set termwinsize=15x0
 "map KEYSTROKES
 map <F2> iJohn Smith<CR>123 Main Street<CR>Anytown, NY<CR><ESC>
 map <F1> i<Tab>int temp_func_name(){<CR>}<Esc>O
+
+" Running prettier
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\   'html': ['prettier']
+\}
+" fix files on save with prettier
+let g:ale_fix_on_save = 1
+
+" Turn off all folding
+augroup NoFolding
+    autocmd!
+    autocmd BufRead * setlocal nofoldenable
+    autocmd BufNewFile * setlocal nofoldenable
+    autocmd BufWrite * setlocal nofoldenable
+augroup END
+
+" Disable folding completely
+set nofoldenable
+set foldmethod=manual
+set foldlevelstart=99
+let g:markdown_folding = 0
+let g:fastfold_savehook = 0
+let g:xml_syntax_folding = 0
+let g:javaScript_fold = 0
+let g:sh_fold_enabled = 0
+let g:ruby_fold = 0
+let g:perl_fold = 0
+let g:perl_fold_blocks = 0
+let g:r_syntax_folding = 0
+let g:rust_fold = 0
+let g:php_folding = 0
